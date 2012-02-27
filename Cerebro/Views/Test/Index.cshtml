@@ -1,0 +1,17 @@
+﻿@using Cerebro.Helpers
+@using Cerebro.Models
+@model StatusBoardViewModel
+           
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div>
+    @Html.Raw(Html.DotNetChart(Model.BurndownChart))
+</div>
+<pre>
+    <code>
+        @ViewBag.ResponseText    
+    </code>
+</pre>

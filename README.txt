@@ -1,0 +1,2 @@
+Cerebro - Readme
+- The beginnings of a status board application.  Pulls data from various web services and combines them into one easily readable dashboard.  Intention is to display the app on a large tv screen in a team room but can also be accessed via any web browser.  Hopefully one day a mobile front end can be added as well.

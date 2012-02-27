@@ -1,0 +1,94 @@
+body
+{
+    font-size: .85em;
+    font-family: Helvetica, Verdana, Sans-Serif;
+    color: #CCCCCC;
+    background-color: #000000;
+}
+
+.header
+{
+    font-size: 2em; /*36px;*/
+    padding: 10px;
+}
+
+.application-title
+{
+    font-weight: bold;
+    color: #1B12A6;
+}
+
+.project-title
+{
+    color: #CCCCCC;
+}
+
+.tasklist
+{
+    /*width: 50%;*/
+    border-style: none;
+    border-collapse: collapse;
+}
+
+.tasklist th
+{
+    background-color: #CCCCCC;
+    font-size: 1.5em; /*24px;*/
+    font-weight: bold;
+    color: #000000;
+    border-style: none;
+}
+
+.tasklist td
+{
+    background-color: #1E1E1E;
+    font-size: 1.5em; /*24px;*/
+    color: #F1F1F1;
+    padding: 5px;
+    border-style: none;
+}
+
+.taskstatus-notstarted
+{
+    background: url(status_red.png) no-repeat;
+    width: 144px;
+    height: 34px;
+}
+
+.taskstatus-inprogress
+{
+    background: url(status_yellow.png) no-repeat;
+    width: 144px;
+    height: 34px;
+
+}
+
+.taskstatus-done
+{
+    background: url(status_green.png) no-repeat;
+    width: 144px;
+    height: 34px;
+}
+
+.testcasesummary
+{
+    
+}
+
+.testcasesummary th
+{
+    background-color: #CCCCCC;
+    font-size: 1.5em; /*24px;*/
+    font-weight: bold;
+    color: #000000;
+    padding: 5px;
+}
+
+.testcasesummary td
+{
+    background-color: #1E1E1E;
+    font-size: 1.5em; /*24px;*/
+    color: #F1F1F1;
+    padding: 5px;
+    text-align: center;
+}

@@ -1,0 +1,49 @@
+﻿@using Cerebro.Helpers
+@model Cerebro.Models.StatusBoardViewModel
+
+@{
+    ViewBag.Title = "BI Status Board";
+}
+
+<div style="float: left; width: 45%; padding: 10px;">
+    <div>
+        <table class="tasklist">
+            <tr>
+                <th>Story</th>
+                <th>Status</th>
+            </tr>
+            @foreach (var item in Model.TaskList)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td><div class="taskstatus-@item.Status.ToString().ToLower()"></div></td>
+                </tr>
+            }    
+        </table>
+    </div>
+</div>
+<div style="float: left; width: 45%; padding: 10px;">
+    <div>
+        <img src="@Model.BurndownChart.TempDirectory/@(Model.BurndownChart.FileName).png" alt="Iteration Burndown" />
+        @*@Html.Raw(Html.DotNetChart(Model.BurndownChart))*@
+    </div>
+    <br />
+    <div>
+        <table class="testcasesummary">
+            <tr>
+                <th colspan="3">Test Cases</th>
+            </tr>
+            <tr>
+                <th>Pass</th>
+                <th>Fail</th>
+                <th>Not Run</th>
+            </tr>
+            <tr>
+                <td>@Model.TestCaseSummary.PassedCount</td>
+                <td>@Model.TestCaseSummary.FailedCount</td>
+                <td>@Model.TestCaseSummary.NotRunCount</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div style="clear: both;">&nbsp;</div>
