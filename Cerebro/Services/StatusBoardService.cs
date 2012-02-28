@@ -84,25 +84,29 @@ namespace Cerebro.Services
             for (var day = iteration.StartDate.Date; day.Date <= iteration.EndDate.Date; day = day.AddDays(1))
             {
                 var remainingTime = 0.0;
-                foreach (var task in tasks)
+                //Do not show values for future dates.
+                if (day <= DateTime.Today)
                 {
-                    if (task.Times.Items.Count == 0)
+                    foreach (var task in tasks)
                     {
-                        remainingTime += task.Effort;
-                    }
-                    else
-                    {
-                        //var timeEntry = task.Times.Items.Where(t => t.Date.Date == day).OrderByDescending(t => t.Date).FirstOrDefault();
-                        var timeEntry = task.Times.Items.Where(t => t.Date.Date <= day).OrderByDescending(t => t.Date).FirstOrDefault();
-                        if (timeEntry == null)
+                        if (task.Times.Items.Count == 0)
                         {
                             remainingTime += task.Effort;
                         }
                         else
                         {
-                            remainingTime += timeEntry.Remain;
-                        }
+                            //var timeEntry = task.Times.Items.Where(t => t.Date.Date == day).OrderByDescending(t => t.Date).FirstOrDefault();
+                            var timeEntry = task.Times.Items.Where(t => t.Date.Date <= day).OrderByDescending(t => t.Date).FirstOrDefault();
+                            if (timeEntry == null)
+                            {
+                                remainingTime += task.Effort;
+                            }
+                            else
+                            {
+                                remainingTime += timeEntry.Remain;
+                            }
 
+                        }
                     }
                 }
                 s.AddElements(new Element(day.ToShortDateString(), remainingTime));
