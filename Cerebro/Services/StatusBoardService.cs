@@ -13,15 +13,20 @@ namespace Cerebro.Services
         public static StatusBoardViewModel BuildStatusBoardViewModel()
         {
             var model = new StatusBoardViewModel();
-            model.BurndownChart = GetBurndownChart();
-            model.TaskList = GetTaskList();
-            model.TestCaseSummary = GetTestCaseSummary();
+
+            var currentIteration = TargetProcessFactory.GetCurrentIteration();
+            if (currentIteration == null)
+                return model;
+
+            model.BurndownChart = GetBurndownChart(currentIteration);
+            model.TaskList = GetTaskList(currentIteration);
+            model.TestCaseSummary = GetTestCaseSummary(currentIteration);
             return model;
         }
 
-        private static TestCaseSummary GetTestCaseSummary()
+        private static TestCaseSummary GetTestCaseSummary(Iteration iteration)
         {
-            var testCases = TargetProcessFactory.GetTestCases();
+            var testCases = TargetProcessFactory.GetTestCases(iteration);
             var passedCount = testCases.Count(tc => tc.LastStatus == "True");
             var failedCount = testCases.Count(tc => tc.LastStatus == "False");
             var notRunCount = testCases.Count(tc => tc.LastStatus == null);
@@ -33,12 +38,11 @@ namespace Cerebro.Services
                         };
         }
 
-        private static List<TaskListItem> GetTaskList()
+        private static List<TaskListItem> GetTaskList(Iteration iteration)
         {
             var report = new List<TaskListItem>();
-            var currentIteration = TargetProcessFactory.GetCurrentIteration();
 
-            foreach (var story in currentIteration.UserStories.Items)
+            foreach (var story in iteration.UserStories.Items)
             {
                 report.Add(new TaskListItem
                                 {
@@ -63,11 +67,10 @@ namespace Cerebro.Services
             }
         }
 
-        private static Chart GetBurndownChart()
+        private static Chart GetBurndownChart(Iteration iteration)
         {
-            var currentIteration = TargetProcessFactory.GetCurrentIteration();
             var tasks = TargetProcessFactory.GetTasksForCurrentIteration();
-            return BuildBurndownChart(currentIteration, tasks);
+            return BuildBurndownChart(iteration, tasks);
         }
 
         private static Chart BuildBurndownChart(Iteration iteration, List<Assignable> tasks)

@@ -58,5 +58,21 @@ namespace Cerebro.DataFactories
                 return new List<TestCase>();
             }
         }
+
+        public static List<TestCase> GetTestCases(Iteration iteration)
+        {
+            var serializer = new JavaScriptSerializer();
+            var url = string.Format("http://creativeop.tpondemand.com/api/v1/Projects/2648/TestCases?where=UserStory.Iteration.Id eq '{0:d}'&include=[Name,LastStatus,LastRunDate]&take=10000", iteration.Id);
+            var response = HttpUtilities.HttpGet(url);
+            try
+            {
+                var testCases = serializer.Deserialize<ListResponse<TestCase>>(response);
+                return testCases.Items;
+            }
+            catch
+            {
+                return new List<TestCase>();
+            }
+        }
     }
 }
