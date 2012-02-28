@@ -30,7 +30,7 @@ namespace Cerebro.DataFactories
         public static List<Assignable> GetTasksForCurrentIteration()
         {
             var serializer = new JavaScriptSerializer();
-            var url = string.Format("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '{0:s}') and (Iteration.EndDate gte '{0:s}')", DateTime.Now.ToString("MM/dd/yyyy"));
+            var url = string.Format("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '{0:s}') and (Iteration.EndDate gte '{0:s}')&take=10000", DateTime.Now.ToString("MM/dd/yyyy"));
             //var response = HttpUtilities.HttpGet("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '2012-2-25') and (Iteration.EndDate gte '2012-2-25')");
             var response = HttpUtilities.HttpGet(url);
             try
