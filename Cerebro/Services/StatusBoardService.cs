@@ -90,7 +90,7 @@ namespace Cerebro.Services
             {
                 var remainingTime = 0.0;
                 //Do not show values for future dates.
-                if (day <= DateTime.Today)
+                if (day <= DateTime.Today.AddDays(1))
                 {
                     foreach (var task in tasks)
                     {
@@ -100,20 +100,9 @@ namespace Cerebro.Services
                         }
                         else
                         {
-                            //var timeEntry = task.Times.Items.Where(t => t.Date.Date == day).OrderByDescending(t => t.Date).FirstOrDefault();
-                            //var timeEntry = task.Times.Items.Where(t => t.Date.Date <= day).OrderByDescending(t => t.Date).FirstOrDefault();
                             //NOTE: The Remain property on a Time object represents only the remaining time for that role (ie/ developer/qa) so we can't use it here.
                             var timeSpent = task.Times.Items.Where(t => t.Date.Date < day).Sum(t => t.Spent);
                             remainingTime += task.Effort - timeSpent;
-                            //if (timeEntry == null)
-                            //{
-                            //    remainingTime += task.Effort;
-                            //}
-                            //else
-                            //{
-                            //    remainingTime += timeEntry.Remain;
-                            //}
-
                         }
                     }
                 }

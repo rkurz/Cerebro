@@ -27,7 +27,6 @@ namespace Cerebro.DataFactories
             }
         }
 
-        
         public static List<UserStory> GetUserStoriesForCurrentIteration(Iteration iteration)
         {
             var serializer = new JavaScriptSerializer();
