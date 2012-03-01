@@ -6,3 +6,4 @@ obj
 App_Data
 *.Publish.xml
 file
+_Resharper.Cerebro
