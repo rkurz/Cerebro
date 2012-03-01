@@ -41,8 +41,9 @@ namespace Cerebro.Services
         private static List<TaskListItem> GetTaskList(Iteration iteration)
         {
             var report = new List<TaskListItem>();
+            var userStories = TargetProcessFactory.GetUserStoriesForCurrentIteration(iteration);
 
-            foreach (var story in iteration.UserStories.Items)
+            foreach (var story in userStories)
             {
                 report.Add(new TaskListItem
                                 {

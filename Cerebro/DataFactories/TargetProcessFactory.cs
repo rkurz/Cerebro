@@ -27,11 +27,26 @@ namespace Cerebro.DataFactories
             }
         }
 
+        
+        public static List<UserStory> GetUserStoriesForCurrentIteration(Iteration iteration)
+        {
+            var serializer = new JavaScriptSerializer();
+            var url = string.Format("http://creativeop.tpondemand.com/api/v1/Iterations/{0:d}/UserStories/?take=10000&include=[Id,Name,EntityState[Id,Name]]", iteration.Id);
+            var response = HttpUtilities.HttpGet(url);
+            try
+            {
+                var tasks = serializer.Deserialize<ListResponse<UserStory>>(response);
+                return tasks.Items;
+            }
+            catch
+            {
+                return new List<UserStory>();
+            }
+        }
         public static List<Assignable> GetTasksForCurrentIteration()
         {
             var serializer = new JavaScriptSerializer();
             var url = string.Format("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '{0:s}') and (Iteration.EndDate gte '{0:s}')&take=10000", DateTime.Now.ToString("MM/dd/yyyy"));
-            //var response = HttpUtilities.HttpGet("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '2012-2-25') and (Iteration.EndDate gte '2012-2-25')");
             var response = HttpUtilities.HttpGet(url);
             try
             {
