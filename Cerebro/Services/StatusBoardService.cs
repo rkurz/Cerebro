@@ -83,9 +83,9 @@ namespace Cerebro.Services
             s = new Series();
             s.Name = "Effort";
             s.Type = SeriesType.Bar;
-            s.DefaultElement.ShowValue = true;
+            //s.DefaultElement.ShowValue = true;
 
-            for (var day = iteration.StartDate.Date; day.Date <= iteration.EndDate.Date; day = day.AddDays(1))
+            for (var day = iteration.StartDate.Date; day.Date <= iteration.EndDate.AddDays(1).Date; day = day.AddDays(1))
             {
                 var remainingTime = 0.0;
                 //Do not show values for future dates.
