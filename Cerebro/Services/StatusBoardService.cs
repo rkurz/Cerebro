@@ -41,8 +41,9 @@ namespace Cerebro.Services
         private static List<TaskListItem> GetTaskList(Iteration iteration)
         {
             var report = new List<TaskListItem>();
+            var userStories = TargetProcessFactory.GetUserStoriesForCurrentIteration(iteration);
 
-            foreach (var story in iteration.UserStories.Items)
+            foreach (var story in userStories)
             {
                 report.Add(new TaskListItem
                                 {
@@ -83,13 +84,13 @@ namespace Cerebro.Services
             s = new Series();
             s.Name = "Effort";
             s.Type = SeriesType.Bar;
-            s.DefaultElement.ShowValue = true;
+            //s.DefaultElement.ShowValue = true;
 
-            for (var day = iteration.StartDate.Date; day.Date <= iteration.EndDate.Date; day = day.AddDays(1))
+            for (var day = iteration.StartDate.Date; day.Date <= iteration.EndDate.AddDays(1).Date; day = day.AddDays(1))
             {
                 var remainingTime = 0.0;
                 //Do not show values for future dates.
-                if (day <= DateTime.Today)
+                if (day <= DateTime.Today.AddDays(1))
                 {
                     foreach (var task in tasks)
                     {
@@ -99,20 +100,9 @@ namespace Cerebro.Services
                         }
                         else
                         {
-                            //var timeEntry = task.Times.Items.Where(t => t.Date.Date == day).OrderByDescending(t => t.Date).FirstOrDefault();
-                            //var timeEntry = task.Times.Items.Where(t => t.Date.Date <= day).OrderByDescending(t => t.Date).FirstOrDefault();
                             //NOTE: The Remain property on a Time object represents only the remaining time for that role (ie/ developer/qa) so we can't use it here.
                             var timeSpent = task.Times.Items.Where(t => t.Date.Date < day).Sum(t => t.Spent);
                             remainingTime += task.Effort - timeSpent;
-                            //if (timeEntry == null)
-                            //{
-                            //    remainingTime += task.Effort;
-                            //}
-                            //else
-                            //{
-                            //    remainingTime += timeEntry.Remain;
-                            //}
-
                         }
                     }
                 }
