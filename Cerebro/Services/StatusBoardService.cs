@@ -6,6 +6,7 @@ using Cerebro.Models;
 using Cerebro.Models.TargetProcess;
 using dotnetCHARTING;
 using Cerebro.DataFactories;
+using Cerebro.ViewModels;
 
 namespace Cerebro.Services
 {
