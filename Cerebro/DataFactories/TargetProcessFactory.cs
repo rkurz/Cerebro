@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using Cerebro.Models;
+using Cerebro.Models.TargetProcess;
 using Cerebro.Utilities;
 
 namespace Cerebro.DataFactories

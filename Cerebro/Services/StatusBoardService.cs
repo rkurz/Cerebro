@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Cerebro.Models;
+using Cerebro.Models.TargetProcess;
 using dotnetCHARTING;
 using Cerebro.DataFactories;
 

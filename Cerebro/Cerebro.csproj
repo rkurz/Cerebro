@@ -73,8 +73,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DotNetChartingHelper.cs" />
-    <Compile Include="Models\Iteration.cs" />
     <Compile Include="Models\StatusBoardViewModel.cs" />
+    <Compile Include="Models\TargetProcess\Assignable.cs" />
+    <Compile Include="Models\TargetProcess\Bug.cs" />
+    <Compile Include="Models\TargetProcess\EntityState.cs" />
+    <Compile Include="Models\TargetProcess\Iteration.cs" />
+    <Compile Include="Models\TargetProcess\ListResponse.cs" />
+    <Compile Include="Models\TargetProcess\Task.cs" />
+    <Compile Include="Models\TargetProcess\TestCase.cs" />
+    <Compile Include="Models\TargetProcess\Time.cs" />
+    <Compile Include="Models\TargetProcess\UserStory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\StatusBoardService.cs" />
     <Compile Include="Utilities\HttpUtilities.cs" />

@@ -7,6 +7,7 @@ using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
 using Cerebro.Models;
+using Cerebro.Models.TargetProcess;
 using dotnetCHARTING;
 using Cerebro.Utilities;
 using Cerebro.DataFactories;
