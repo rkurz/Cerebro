@@ -11,11 +11,18 @@ namespace Cerebro.Services
 {
     public class StatusBoardService
     {
-        public static StatusBoardViewModel BuildStatusBoardViewModel()
+        private ITargetProcessFactory _targetProcessFactory;
+
+        public StatusBoardService(ITargetProcessFactory targetProcessFactory)
+        {
+            _targetProcessFactory = targetProcessFactory;
+        }
+
+        public StatusBoardViewModel BuildStatusBoardViewModel()
         {
             var model = new StatusBoardViewModel();
 
-            var currentIteration = TargetProcessFactory.GetCurrentIteration();
+            var currentIteration = _targetProcessFactory.GetCurrentIteration();
             if (currentIteration == null)
                 return model;
 
@@ -25,9 +32,9 @@ namespace Cerebro.Services
             return model;
         }
 
-        private static TestCaseSummary GetTestCaseSummary(Iteration iteration)
+        private TestCaseSummary GetTestCaseSummary(Iteration iteration)
         {
-            var testCases = TargetProcessFactory.GetTestCases(iteration);
+            var testCases = _targetProcessFactory.GetTestCases(iteration);
             var passedCount = testCases.Count(tc => tc.LastStatus == "True");
             var failedCount = testCases.Count(tc => tc.LastStatus == "False");
             var notRunCount = testCases.Count(tc => tc.LastStatus == null);
@@ -39,10 +46,10 @@ namespace Cerebro.Services
                         };
         }
 
-        private static List<TaskListItem> GetTaskList(Iteration iteration)
+        private List<TaskListItem> GetTaskList(Iteration iteration)
         {
             var report = new List<TaskListItem>();
-            var userStories = TargetProcessFactory.GetUserStoriesForCurrentIteration(iteration);
+            var userStories = _targetProcessFactory.GetUserStoriesForCurrentIteration(iteration);
 
             foreach (var story in userStories)
             {
@@ -56,7 +63,7 @@ namespace Cerebro.Services
             return report;
         }
 
-        private static TaskStatus GetTaskStatus(string entityStateName)
+        private TaskStatus GetTaskStatus(string entityStateName)
         {
             switch (entityStateName)
             {
@@ -69,9 +76,9 @@ namespace Cerebro.Services
             }
         }
 
-        private static ChartViewModel GetBurndownChart(Iteration iteration)
+        private ChartViewModel GetBurndownChart(Iteration iteration)
         {
-            var tasks = TargetProcessFactory.GetTasksForCurrentIteration();
+            var tasks = _targetProcessFactory.GetTasksForCurrentIteration();
             return ChartService.BuildBurndownChart(iteration, tasks);
         }
     }

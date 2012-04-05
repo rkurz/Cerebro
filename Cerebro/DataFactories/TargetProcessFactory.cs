@@ -9,9 +9,9 @@ using Cerebro.Utilities;
 
 namespace Cerebro.DataFactories
 {
-    public class TargetProcessFactory
+    public class TargetProcessFactory : ITargetProcessFactory
     {
-        public static Iteration GetCurrentIteration()
+        public Iteration GetCurrentIteration()
         {
             var serializer = new JavaScriptSerializer();
             var url = string.Format("http://creativeop.tpondemand.com/api/v1/Projects/2648/Iterations/?where=(StartDate lte '{0:s}') and (EndDate gte '{0:s}')&include=[Name, StartDate, EndDate, UserStories[Name, EntityState]]", DateTime.Now.ToString("MM/dd/yyyy"));
@@ -28,7 +28,7 @@ namespace Cerebro.DataFactories
             }
         }
 
-        public static List<UserStory> GetUserStoriesForCurrentIteration(Iteration iteration)
+        public List<UserStory> GetUserStoriesForCurrentIteration(Iteration iteration)
         {
             var serializer = new JavaScriptSerializer();
             var url = string.Format("http://creativeop.tpondemand.com/api/v1/Iterations/{0:d}/UserStories/?take=10000&include=[Id,Name,EntityState[Id,Name]]", iteration.Id);
@@ -43,7 +43,7 @@ namespace Cerebro.DataFactories
                 return new List<UserStory>();
             }
         }
-        public static List<Assignable> GetTasksForCurrentIteration()
+        public List<Assignable> GetTasksForCurrentIteration()
         {
             var serializer = new JavaScriptSerializer();
             var url = string.Format("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '{0:s}') and (Iteration.EndDate gte '{0:s}')&take=10000", DateTime.Now.ToString("MM/dd/yyyy"));
@@ -59,7 +59,7 @@ namespace Cerebro.DataFactories
             }
         }
 
-        public static List<TestCase> GetTestCases()
+        public List<TestCase> GetTestCases()
         {
             var serializer = new JavaScriptSerializer();
             var response = HttpUtilities.HttpGet("http://creativeop.tpondemand.com/api/v1/Projects/2648/TestCases?include=[Name,LastStatus,LastRunDate]&take=10000");
@@ -74,7 +74,7 @@ namespace Cerebro.DataFactories
             }
         }
 
-        public static List<TestCase> GetTestCases(Iteration iteration)
+        public List<TestCase> GetTestCases(Iteration iteration)
         {
             var serializer = new JavaScriptSerializer();
             var url = string.Format("http://creativeop.tpondemand.com/api/v1/Projects/2648/TestCases?where=UserStory.Iteration.Id eq '{0:d}'&include=[Name,LastStatus,LastRunDate]&take=10000", iteration.Id);

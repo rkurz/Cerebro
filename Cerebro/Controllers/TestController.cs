@@ -18,37 +18,37 @@ namespace Cerebro.Controllers
     public class TestController : Controller
     {
 
-        public ActionResult Index()
-        {
-            //Iteration iteration;
-            List<Assignable> assignables;
-            var serializer = new JavaScriptSerializer();
+        //public ActionResult Index()
+        //{
+        //    //Iteration iteration;
+        //    List<Assignable> assignables;
+        //    var serializer = new JavaScriptSerializer();
             
-            //var test = HttpGet("http://creativeop.tpondemand.com/api/v1/Userstories/");
-            //var test = HttpGet("http://creativeop.tpondemand.com/api/v1/Projects/2648/?include=[Iterations[StartDate, EndDate]]&where=(Iterations[Items[StartDate]] gt '2012-04-04')");
-            //var test = HttpGet("http://creativeop.tpondemand.com/api/v1/Projects/2648/Iterations/?where=(StartDate lte '2012-2-25') and (EndDate gte '2012-2-25')&include=[Name, StartDate, EndDate, UserStories[Name, Description, Effort, EffortCompleted, EffortToDo, RoleEfforts], Bugs[Name, Description, Effort, EffortCompleted, EffortToDo], Tasks[Name, Description, Effort, EffortCompleted, EffortToDo]]");
-            var test = HttpUtilities.HttpGet("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '2012-2-25') and (Iteration.EndDate gte '2012-2-25')");
+        //    //var test = HttpGet("http://creativeop.tpondemand.com/api/v1/Userstories/");
+        //    //var test = HttpGet("http://creativeop.tpondemand.com/api/v1/Projects/2648/?include=[Iterations[StartDate, EndDate]]&where=(Iterations[Items[StartDate]] gt '2012-04-04')");
+        //    //var test = HttpGet("http://creativeop.tpondemand.com/api/v1/Projects/2648/Iterations/?where=(StartDate lte '2012-2-25') and (EndDate gte '2012-2-25')&include=[Name, StartDate, EndDate, UserStories[Name, Description, Effort, EffortCompleted, EffortToDo, RoleEfforts], Bugs[Name, Description, Effort, EffortCompleted, EffortToDo], Tasks[Name, Description, Effort, EffortCompleted, EffortToDo]]");
+        //    var test = HttpUtilities.HttpGet("http://creativeop.tpondemand.com/api/v1/Assignables?include=[Times[Remain,Spent,Date],Id,Name,Description,Effort,EffortCompleted,EffortToDo,EntityType,Iteration[Name,StartDate,EndDate]]&where=(Project.Id eq 2648) and (Iteration.StartDate lte '2012-2-25') and (Iteration.EndDate gte '2012-2-25')");
 
-            try
-            {
-                var response = serializer.Deserialize<ListResponse<Assignable>>(test);
-                //iteration = response.Items[0];
-                assignables = response.Items;
-            }
-            catch
-            {
-            }
+        //    try
+        //    {
+        //        var response = serializer.Deserialize<ListResponse<Assignable>>(test);
+        //        //iteration = response.Items[0];
+        //        assignables = response.Items;
+        //    }
+        //    catch
+        //    {
+        //    }
 
-            ViewBag.ResponseText = test;
-            //ViewBag.ResponseText = "Hello World";
+        //    ViewBag.ResponseText = test;
+        //    //ViewBag.ResponseText = "Hello World";
 
-            //var currentIteration = TargetProcessFactory.GetCurrentIteration();
-            //var tasks = TargetProcessFactory.GetTasksForCurrentIteration();
-            var model = StatusBoardService.BuildStatusBoardViewModel();
-            //model.BurndownChart = GetChart();
+        //    //var currentIteration = TargetProcessFactory.GetCurrentIteration();
+        //    //var tasks = TargetProcessFactory.GetTasksForCurrentIteration();
+        //    var model = StatusBoardService.BuildStatusBoardViewModel();
+        //    //model.BurndownChart = GetChart();
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         //private Chart BuildBurndownChart(Iteration iteration, List<Assignable> tasks)
         //{
