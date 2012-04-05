@@ -83,8 +83,10 @@
     <Compile Include="Models\TargetProcess\Time.cs" />
     <Compile Include="Models\TargetProcess\UserStory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ChartService.cs" />
     <Compile Include="Services\StatusBoardService.cs" />
     <Compile Include="Utilities\HttpUtilities.cs" />
+    <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\StatusBoardViewModel.cs" />
     <Compile Include="ViewModels\TaskListItem.cs" />
     <Compile Include="ViewModels\TaskStatus.cs" />

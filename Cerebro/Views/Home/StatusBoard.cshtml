@@ -24,7 +24,7 @@
 </div>
 <div style="float: left; width: 45%; padding: 10px;">
     <div>
-        <img src="@Model.BurndownChart.TempDirectory/@(Model.BurndownChart.FileName).png" alt="Iteration Burndown" />
+        <img src="@Model.BurndownChart.ImageFileName" alt="Iteration Burndown" />
         @*@Html.Raw(Html.DotNetChart(Model.BurndownChart))*@
     </div>
     <br />
